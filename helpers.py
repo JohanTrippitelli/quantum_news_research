@@ -1,37 +1,57 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
 import time
 
 def get_element_value(parent, xpath_expr):
     """
     Retrieves the value of an element based on the given XPath.
     - If the XPath includes '/@attribute', extracts that attribute.
+    - If the XPath selects a text node using 'text()', it extracts the raw text from the parent element.
     - If it's a normal XPath, returns the element's text.
-    - If it's an object, returns the full element (for debugging).
-    
+
     Args:
         parent: Selenium WebElement or driver object.
         xpath_expr (str): XPath expression.
 
     Returns:
-        str: The extracted text or attribute value.
+        str: The extracted text or attribute value, or None if not found.
     """
+    print("Extracting element Value ...")
     try:
         if '/@' in xpath_expr:
+            print("🔍 Extracting attribute...")
             # Extract attribute
             base_xpath, attr = xpath_expr.rsplit('/@', 1)
             element = parent.find_element(By.XPATH, base_xpath)
             return element.get_attribute(attr)
 
+        elif 'text()' in xpath_expr:
+            print("🔍 Extracting text node...")
+            base_xpath = xpath_expr.replace('/text()', '')
+
+            # Try finding the element first
+            elements = parent.find_elements(By.XPATH, base_xpath)
+            if elements:
+                return elements[0].text.strip() if elements[0].text.strip() else None
+            
+            # If Selenium still fails, use JavaScript to extract text content
+            return parent.execute_script("return arguments[0].textContent;", elements[0]) if elements else None
+
         else:
-            # Extract text content
+            print("🔍 Extracting pure element...")
+            # Extract text content from an element
             element = parent.find_element(By.XPATH, xpath_expr)
             return element.text.strip() if element.text.strip() else None
 
+    except NoSuchElementException:
+        print(f"⚠️ Element not found for XPath: {xpath_expr}")
     except Exception as e:
-        print(f"⚠️ Error extracting value using XPath: {xpath_expr} - {e}")
-        return None  # Return None if element not found
+        print(f"⚠️ Unexpected error extracting value using XPath: {xpath_expr} - {e}")
+
+    return None  # Return None if element not found
+
 
 def get_modified_xpath(base_xpath, index, target_xpath):
     """

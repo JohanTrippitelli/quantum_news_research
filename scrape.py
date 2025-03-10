@@ -8,7 +8,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from helpers import get_element_value, get_modified_xpath, handle_popup
 from urllib.parse import urljoin
 
-
 def scrape_site(config, human_mode=False):
     print("🚀 Starting web scraping...")
 
@@ -60,55 +59,53 @@ def scrape_site(config, human_mode=False):
             print(f"⚠️ Error extracting URL from article {i+1}: {e}")
 
     print(f"\n✅ Total URLs collected: {len(article_urls)}")
-    driver.quit()
-
+    
     if not article_urls:
         print("❌ No article URLs found. Exiting script.")
+        driver.quit()
         return
 
     # Step 2: Visit each article URL and extract data
     articles = []
-    driver = webdriver.Chrome()
 
     for i, article_url in enumerate(article_urls):
         try:
             print(f"\n🌍 Navigating to article {i+1}: {article_url}")
             driver.get(article_url)
 
-            # ✅ New: Wait 2 seconds before checking for popups
+            # ✅ Check for popups again on article pages
             handle_popup(driver, config.get('click_popup', False))
 
             if human_mode:
                 input("👤 Human mode: Press Enter to scrape the article page...")
 
-            # Generate modified XPaths for Title, Author, Date, and Synopsis
-            modified_title_xpath = get_modified_xpath(config['items_out'], i, config['Title'])
-            # modified_author_xpath = get_modified_xpath(config['items_out'], i, config['Author'])
-            # modified_date_xpath = get_modified_xpath(config['items_out'], i, config['Date'])
-            # modified_synopsis_xpath = get_modified_xpath(config['items_out'], i, config['Synopsis'])
-
-            # Print Title XPath before searching
-            print(f"🔍 Searching for title using XPath: {modified_title_xpath}")
-
-            # Try finding the title and print results
-            title = get_element_value(driver, modified_title_xpath)
-            if title:
-                print(f"✅ Found title: {title}")
+            # ✅ **Key Fix: Adjust XPath usage based on `in_url`**
+            if config.get('in_url', False):
+                # If extracting from the article page itself, use XPaths as-is
+                title_xpath = config['Title']
+                author_xpath = config['Author']
+                date_xpath = config['Date']
+                synopsis_xpath = config['Synopsis']
             else:
-                print("❌ No title found.")
+                # If extracting from listing page, modify XPaths relative to items_out
+                title_xpath = get_modified_xpath(config['items_out'], i, config['Title'])
+                author_xpath = get_modified_xpath(config['items_out'], i, config['Author'])
+                date_xpath = get_modified_xpath(config['items_out'], i, config['Date'])
+                synopsis_xpath = get_modified_xpath(config['items_out'], i, config['Synopsis'])
 
-            # # Extract content from the article page
-            # author = get_element_value(driver, modified_author_xpath)
-            # date = get_element_value(driver, modified_date_xpath)
-            # synopsis = get_element_value(driver, modified_synopsis_xpath)
+            # Extract content
+            title = get_element_value(driver, title_xpath)
+            author = get_element_value(driver, author_xpath)
+            date = get_element_value(driver, date_xpath)
+            synopsis = get_element_value(driver, synopsis_xpath)
 
             print(f"✅ Scraped article {i+1}: {title} by {author} on {date}")
 
             articles.append({
                 "Title": title,
-                "Author": "author",
-                "Date": "date",
-                "Synopsis": "synopsis",
+                "Author": author,
+                "Date": date,
+                "Synopsis": synopsis,
                 "URL": article_url
             })
 
