@@ -1,34 +1,44 @@
-# Web Scraper Project
+# 🕵️‍♂️ Web Scraper Project
 
-## Overview
+## 📌 Overview
 
-This project is a web scraping pipeline that extracts articles from websites using configurable XPath expressions. The configuration for each target website is maintained in a YAML file (`x_paths.yaml`), allowing you to adjust scraping parameters without modifying the code.
+This project is a **web scraping pipeline** that extracts articles from websites using **configurable XPath expressions**.  
+The scraping configuration is stored in a **YAML file (`x_paths.yaml`)**, allowing you to easily update scraping parameters without modifying the code.
 
-The project consists of three main files:
-- **main.py:** The entry point that reads the YAML configuration and invokes the scraping process based on a command-line parameter.
-- **scrape.py:** Contains the scraping logic, utilizing Selenium (and optionally requests) to extract article details.
-- **x_paths.yaml:** A YAML file holding the scraping parameters, including the starting URL and XPaths for the article elements (Title, Author, Date, Synopsis).
+### 📂 Project Structure
+- **`main.py`** – The entry point that reads the YAML configuration and invokes the scraper via the command line.
+- **`scrape.py`** – Contains the scraping logic, utilizing **Selenium** (and optionally **Requests**) to extract article details.
+- **`x_paths.yaml`** – Stores the scraping parameters, including the starting URL and **XPaths** for article elements *(Title, Author, Date, Synopsis, etc.)*.
 
-## Features
+---
 
-- **Configurable Scraping:** Easily define the starting URL and XPath selectors for each website in the YAML file.
-- **Dynamic Extraction:** Supports scraping both from listing pages and individual article pages, based on the configuration.
-- **Command-Line Operation:** Run the scraper by specifying the site configuration name as a command-line argument.
-- **Basic Error Handling:** Logs errors encountered during the scraping process and continues with other articles.
+## 🚀 Features
 
-## Requirements
+- ✅ **Configurable Scraping** – Define the **starting URL** and **XPath selectors** in a YAML file.  
+- ✅ **Dynamic Extraction** – Supports scraping from both **listing pages** and **individual article pages**.  
+- ✅ **Command-Line Operation** – Run the scraper using a simple **CLI command**.  
+- ✅ **Basic Error Handling** – Logs errors while scraping and continues with the next available article.  
 
-- **Python 3.6+**
-- **Selenium:** For web automation.
-- **PyYAML:** To parse the YAML configuration.
-- **Requests:** (Optional) For handling HTTP requests if needed.
+---
 
-> **Note:** Ensure you have the appropriate WebDriver (e.g., [ChromeDriver](https://chromedriver.chromium.org/downloads)) installed and available in your system PATH.
+## 🛠️ Requirements
 
+📌 Ensure you have the following installed:  
+- **Python 3.6+**  
+- **Selenium** (for web automation)  
+- **PyYAML** (to parse the YAML configuration)  
+- **Requests** *(optional, for handling HTTP requests if needed)*  
 
-## Set Up instructions:
-1. Create a virtual environment in the desired folder:
-    python -m venv venv
+> **Note:** Make sure you have the appropriate WebDriver installed (e.g., [ChromeDriver](https://chromedriver.chromium.org/downloads)) and available in your system **PATH**.
+
+---
+
+## 📥 Setup Instructions
+
+### 🔹 Create a Virtual Environment
+```sh
+python -m venv venv
+
 
 2. Activate the environment:
     On macOS/Linux:
