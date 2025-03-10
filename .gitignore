@@ -1,0 +1,1 @@
+echo "__pycache__/\n*.log\n*.csv\n*.xlsx\n.env" > .gitignore

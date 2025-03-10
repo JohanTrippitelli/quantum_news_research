@@ -1,0 +1,10 @@
+FinancialTimes:
+  start_url: "https://www.ft.com/search?q=quantum+computing"
+  items_out: "//li[contains(@class, 'results__list-item')]" # XPath to locate each article element
+  click_popup: "//button[contains(@title, 'Accept Cookies')]"
+  url: ".//div[contains(@class, 'heading')]/a/@href" # XPath (relative to each article element) to get the article URL
+  in_url: true # If true, additional details are on the article page; if true, scrape from the listing
+  Title: "//blockquote/text()" # XPath for the article title (either on the listing or the article page)
+  Author: ".//span[@class='author']" # XPath for the article author
+  Date: ".//time" # XPath for the article date
+  Synopsis: ".//p[@class='summary']" # XPath for the article synopsis
