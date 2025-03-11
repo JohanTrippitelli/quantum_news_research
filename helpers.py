@@ -140,4 +140,20 @@ def handle_popup(driver, popup_xpath):
         print(f"⚠️ No popup found or could not be clicked: {e}")
         driver.switch_to.default_content()  # Ensure we return to the main page
         return False  # No popup present
+    
 
+def relevance_check(title, keywords):
+    """
+    Checks the title for relevant keywords. If none are found the articles have become irrelevant and scraping can stop.
+    
+    Args:
+        title: The article title to reference the keywords
+        keywords: provided in the config file.
+
+    Returns:
+        bool: True if still relevant False if irrelevant
+    """
+    if not title or not keywords:
+            return False  # Skip if title is empty or no keywords are provided
+
+    return any(keyword.casefold() in title for keyword in keywords)

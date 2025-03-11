@@ -8,3 +8,4 @@ FinancialTimes:
   Author: ".//span[@class='author']" # XPath for the article author
   Date: ".//time" # XPath for the article date
   Synopsis: ".//p[@class='summary']" # XPath for the article synopsis
+  keywords: ["quantum", "computing"]

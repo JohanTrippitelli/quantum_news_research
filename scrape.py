@@ -5,8 +5,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from helpers import get_element_value, get_modified_xpath, handle_popup
+from helpers import get_element_value, get_modified_xpath, handle_popup, relevance_check
 from urllib.parse import urljoin
+import random
 
 def scrape_site(config, human_mode=False):
     print("🚀 Starting web scraping...")
@@ -26,7 +27,7 @@ def scrape_site(config, human_mode=False):
     if human_mode:
         input("👤 Human mode: Press Enter to start scraping...")
 
-    time.sleep(3)
+    time.sleep(random.randrange(3))
 
     # Step 1: Collect all article URLs
     print(f"🔍 Looking for articles using XPath: {config['items_out']}")
@@ -98,6 +99,13 @@ def scrape_site(config, human_mode=False):
             author = get_element_value(driver, author_xpath)
             date = get_element_value(driver, date_xpath)
             synopsis = get_element_value(driver, synopsis_xpath)
+
+            keywords = config['keywords']
+            
+            if not relevance_check(title, keywords):
+                print(f"Articles have become irrelevant after scraping {i+1} articles.")
+                print(f"Irrelevant article titled: {title}")
+                break
 
             print(f"✅ Scraped article {i+1}: {title} by {author} on {date}")
 
