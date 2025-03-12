@@ -7,10 +7,6 @@ __pycache__/
 # Ignore Virtual Environment
 q_env/
 
-# Ignore System Files (macOS, Windows, Linux)
-.DS_Store
-Thumbs.db
-
 # Ignore Logs and Temporary Files
 *.log
 *.tmp
@@ -20,5 +16,9 @@ Thumbs.db
 .idea/
 *.swp
 
-# Prevent `.gitignore` from being ignored (This is important!)
+# Ignore System Files (macOS, Windows)
+.DS_Store
+Thumbs.db
+
+# Prevent `.gitignore` from being ignored
 !.gitignore
