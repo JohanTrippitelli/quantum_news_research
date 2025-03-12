@@ -1,29 +1,30 @@
-# 🕵️‍♂️ Web Scraper Project
 
-## 📌 Overview
+# Web Scraper Project
+
+## Overview
 
 This project is a **web scraping pipeline** that extracts articles from websites using **configurable XPath expressions**.  
 The scraping configuration is stored in a **YAML file (`x_paths.yaml`)**, allowing you to easily update scraping parameters without modifying the code.
 
-### 📂 Project Structure
+### Project Structure
 - **`main.py`** – The entry point that reads the YAML configuration and invokes the scraper via the command line.
 - **`scrape.py`** – Contains the scraping logic, utilizing **Selenium** (and optionally **Requests**) to extract article details.
 - **`x_paths.yaml`** – Stores the scraping parameters, including the starting URL and **XPaths** for article elements *(Title, Author, Date, Synopsis, etc.)*.
 
 ---
 
-## 🚀 Features
+## Features
 
-- ✅ **Configurable Scraping** – Define the **starting URL** and **XPath selectors** in a YAML file.  
-- ✅ **Dynamic Extraction** – Supports scraping from both **listing pages** and **individual article pages**.  
-- ✅ **Command-Line Operation** – Run the scraper using a simple **CLI command**.  
-- ✅ **Basic Error Handling** – Logs errors while scraping and continues with the next available article.  
+- **Configurable Scraping** – Define the **starting URL** and **XPath selectors** in a YAML file.  
+- **Dynamic Extraction** – Supports scraping from both **listing pages** and **individual article pages**.  
+- **Command-Line Operation** – Run the scraper using a simple **CLI command**.  
+- **Basic Error Handling** – Logs errors while scraping and continues with the next available article.  
 
 ---
 
-## 🛠️ Requirements
+## Requirements
 
-📌 Ensure you have the following installed:  
+Ensure you have the following installed:  
 - **Python 3.6+**  
 - **Selenium** (for web automation)  
 - **PyYAML** (to parse the YAML configuration)  
@@ -33,9 +34,9 @@ The scraping configuration is stored in a **YAML file (`x_paths.yaml`)**, allowi
 
 ---
 
-## 📥 Setup Instructions
+## Setup Instructions
 
-### 🔹 Create a Virtual Environment
+### Create a Virtual Environment
 ```sh
 python -m venv venv
 
