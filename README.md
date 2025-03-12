@@ -39,25 +39,37 @@ Ensure you have the following installed:
 ### Create a Virtual Environment
 ```sh
 python -m venv venv
-
+```
 
 2. Activate the environment:
     On macOS/Linux:
+   ```sh
         source venv/bin/activate
+   ```
     On Windows:
+   ```sh
         venv\Scripts\activate
+   ```
 
 2. Give executable permission to the makeFile:
     macOS/Linux:
+   ```sh
         chmod +x setup.sh
+   ```
     Windows:
         Skip Step
 
-3. Run the setup.sh file:
+4. Run the setup.sh file:
     macOS/Linux:
+   ```sh
         ./setup.sh
+   ```
     Windows:
+   ```sh
         setup.bat
+   ```
 
-4. Run the following command line:
+6. Run the following command line:
+```sh
     python main.py x_paths.yaml example_site -hm
+```
