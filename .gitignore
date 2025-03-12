@@ -1,1 +1,24 @@
-echo "__pycache__/\n*.log\n*.csv\n*.xlsx\n.env" > .gitignore
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore Virtual Environment
+q_env/
+
+# Ignore System Files (macOS, Windows, Linux)
+.DS_Store
+Thumbs.db
+
+# Ignore Logs and Temporary Files
+*.log
+*.tmp
+
+# Ignore IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+
+# Prevent `.gitignore` from being ignored (This is important!)
+!.gitignore
