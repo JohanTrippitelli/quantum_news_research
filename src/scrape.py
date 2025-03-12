@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from helpers import get_element_value, get_modified_xpath, handle_popup, relevance_check
+from src.helpers import get_element_value, get_modified_xpath, handle_popup, relevance_check
 from urllib.parse import urljoin
 import random
 

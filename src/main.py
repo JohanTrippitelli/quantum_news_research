@@ -1,7 +1,7 @@
 # main.py
 import sys
 import yaml
-import scrape
+import src.scrape as scrape
 
 def main(yaml_file, site_name, human_mode):
     # Load configuration from the provided YAML file
